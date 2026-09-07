@@ -180,7 +180,7 @@ function isVarCheckedLater(source: string, matchIndex: number, varName: string):
 
   const targetDepth = depth > 1 ? 1 : 0;
   let searchEnd = source.length;
-  
+
   for (let i = matchIndex + 1; i < source.length; i++) {
     if (source[i] === '{') depth++;
     else if (source[i] === '}') {
@@ -261,7 +261,7 @@ export class UncheckedReturnPlugin implements IRulePlugin {
       }
 
       const { isAssigned, name: varName } = getAssignment(prefix);
-      
+
       if (isAssigned) {
         if (varName && isVarCheckedLater(masked, matchIndex, varName)) {
           continue;

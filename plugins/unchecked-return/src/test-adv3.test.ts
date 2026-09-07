@@ -14,8 +14,12 @@ describe('UncheckedReturnPlugin bugs', () => {
       }
     `;
     const findings = await plugin.analyze({
-      contractName: 'Test', sourceCode: source, chain: 'ethereum',
-      language: 'solidity', compilerVersion: '0.8.0', metadata: {}
+      contractName: 'Test',
+      sourceCode: source,
+      chain: 'ethereum',
+      language: 'solidity',
+      compilerVersion: '0.8.0',
+      metadata: {},
     });
     expect(findings).toHaveLength(0); // Should now pass!
   });
@@ -33,8 +37,12 @@ describe('UncheckedReturnPlugin bugs', () => {
       }
     `;
     const findings = await plugin.analyze({
-      contractName: 'Test', sourceCode: source, chain: 'ethereum',
-      language: 'solidity', compilerVersion: '0.8.0', metadata: {}
+      contractName: 'Test',
+      sourceCode: source,
+      chain: 'ethereum',
+      language: 'solidity',
+      compilerVersion: '0.8.0',
+      metadata: {},
     });
     expect(findings).toHaveLength(0); // Should now pass!
   });

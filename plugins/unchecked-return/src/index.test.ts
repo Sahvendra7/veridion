@@ -266,51 +266,57 @@ describe('UncheckedReturnPlugin', () => {
 
   it('should provide fix recommendations', () => {
     const rec = plugin.getFixRecommendation({
-        pluginId: plugin.metadata.id,
-        title: 'Unchecked Return Value from .call()',
-        description: '',
-        severity: FindingSeverity.HIGH,
-        filePath: 'Test.sol',
-        lineStart: 10,
-        lineEnd: 10,
-        codeSnippet: 'target.call("");',
-        recommendation: '',
-        confidence: 0.9,
-        references: []
+      pluginId: plugin.metadata.id,
+      title: 'Unchecked Return Value from .call()',
+      description: '',
+      severity: FindingSeverity.HIGH,
+      filePath: 'Test.sol',
+      lineStart: 10,
+      lineEnd: 10,
+      codeSnippet: 'target.call("");',
+      recommendation: '',
+      confidence: 0.9,
+      references: [],
     });
     expect(rec).toContain('require(success');
     expect(rec).toContain('.call()');
   });
 
   it('should support correct context', () => {
-    expect(plugin.supportsContext({
+    expect(
+      plugin.supportsContext({
         contractName: 'Test',
         sourceCode: '',
         chain: 'ethereum',
         language: 'solidity',
         compilerVersion: null,
-        metadata: {}
-    })).toBe(true);
-    
-    expect(plugin.supportsContext({
+        metadata: {},
+      }),
+    ).toBe(true);
+
+    expect(
+      plugin.supportsContext({
         contractName: 'Test',
         sourceCode: '',
         chain: 'unknown_chain',
         language: 'solidity',
         compilerVersion: null,
-        metadata: {}
-    })).toBe(false);
+        metadata: {},
+      }),
+    ).toBe(false);
 
-    expect(plugin.supportsContext({
+    expect(
+      plugin.supportsContext({
         contractName: 'Test',
         sourceCode: '',
         chain: 'ethereum',
         language: 'vyper',
         compilerVersion: null,
-        metadata: {}
-    })).toBe(false);
+        metadata: {},
+      }),
+    ).toBe(false);
   });
-  
+
   it('should handle single var check correctly', async () => {
     const source = `
       contract Test {
@@ -323,7 +329,7 @@ describe('UncheckedReturnPlugin', () => {
     const findings = await analyze(source);
     expect(findings).toHaveLength(0);
   });
-  
+
   it('should handle var checked in different scope', async () => {
     const source = `
       contract Test {
